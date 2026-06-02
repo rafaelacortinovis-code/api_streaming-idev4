@@ -57,4 +57,23 @@ router.put("/:id", async (req, res) => {
      }
 });
 
+router.delete("/:id", async (req,res) => {
+    try{
+        const musicaDelete = await Musica.findByIdAndDelete(
+            req.params.id);
+            if(!musicaDelete) {
+                return res.status(404).json({
+                    message:"Música não encontrada",
+                });
+            }
+            res.status(200).json({
+                message: "Música deletada com sucesso",
+            });
+        } catch (error) {
+            res.status(500).json({
+                message: error.message,
+            });
+       }
+});
+
 modules.exports = router;       
