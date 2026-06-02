@@ -24,4 +24,37 @@ router.get('/', async (req,res) => {
     }
 });
 
-modules.exports = router; 
+router.post("/", async (req, res) => {
+     
+    try{
+    const novaMusica = new Musica(req.body);
+    await novaMusica.save();
+    res.status(201).json(novaMusica);
+} catch (error) {
+    res.status(400).json ({
+        message: error.message,
+    });
+  } 
+});
+
+router.put("/:id", async (req, res) => {
+    try{
+        const musicaAtualiza = await Musica.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new:true}
+        );
+        if(!musicaAtualizada){
+            return res.status(404).json({
+                message: "Musica não encontrada",
+            });
+        }
+        res.status(200).json(musicaAtualizada);
+     }catch (error){
+        res.status(440).json({
+            messagem:error.message,
+        });
+     }
+});
+
+modules.exports = router;       
