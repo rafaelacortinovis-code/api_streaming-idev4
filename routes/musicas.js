@@ -7,7 +7,7 @@ const musicasSchema = new mongoose.Schema({
     titulo: String,
     artista : String,
     genero: String,
-    ano:Number,
+    ano:Number,         
     duracao: Number,
     disponivel: Boolean,
     detalhes: Object
